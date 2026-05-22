@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Insumos</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f1c40f;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+
+        body { background-color: #f4f7f6; display: flex; min-height: 100vh; }
+
+        /* Sidebar Navigation */
+        nav { width: 250px; background: var(--dark); color: white; padding: 20px; transition: 0.3s; }
+        nav h2 { font-size: 1.2rem; margin-bottom: 30px; text-align: center; color: var(--accent); }
+        nav ul { list-style: none; }
+        nav li { padding: 12px; cursor: pointer; border-bottom: 1px solid #3e4f5f; font-size: 0.9rem; }
+        nav li:hover { background: var(--accent); }
+
+        /* Main Content */
+        main { flex: 1; padding: 30px; overflow-y: auto; }
+        .screen { display: none; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .screen.active { display: block; }
+
+        h1 { margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid var(--light); padding-bottom: 10px; }
+
+        /* Forms & Inputs */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--secondary); }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        button { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; transition: 0.2s; }
+        
+        .btn-add { background: var(--success); }
+        .btn-del { background: var(--danger); }
+        .btn-cancel { background: #95a5a6; }
+        .btn-login { background: var(--accent); width: 100%; margin-top: 10px; }
+        button:hover { opacity: 0.8; }
+
+        /* Tables & Lists */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #eee; }
+        th { background: var(--light); }
+
+        /* Status Badges */
+        .badge { padding: 5px 10px; border-radius: 12px; font-size: 0.8rem; color: white; font-weight: bold; }
+        .approved { background: var(--success); }
+        .rejected { background: var(--danger); }
+        .waiting { background: var(--warning); color: #333; }
+
+        /* Layout Especial Login */
+        #login-container { max-width: 400px; margin: 100px auto; }
+    </style>
+</head>
+<body>
+
+<nav id="sidebar" style="display:none;">
+    <h2>GESTOR PRO</h2>
+    <ul>
+        <li onclick="showScreen('cadastro-categoria')">Cadastro de Categorias</li>
+        <li onclick="showScreen('cadastro-itens')">Cadastro de Itens</li>
+        <li onclick="showScreen('cadastro-usuarios')">Cadastro de Usuários</li>
+        <li onclick="showScreen('selecao-itens')">Solicitar Itens</li>
+        <li onclick="showScreen('gestao')">Gestão e Avaliação</li>
+        <li onclick="showScreen('relatorio')">Relatórios</li>
+        <li onclick="location.reload()" style="margin-top: 20px; color: #ff7675;">Sair</li>
+    </ul>
+</nav>
+
+<main>
+    <!-- 1. TELA DE LOGIN -->
+    <div id="login" class="screen active">
+        <div id="login-container">
+            <h1>Acesso ao Sistema</h1>
+            <div class="form-group">
+                <label>Nome do Usuário</label>
+                <input type="text" placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+                <label>Número do Crachá</label>
+                <input type="number" placeholder="000000">
+            </div>
+            <button class="btn-login" onclick="login()">Logar</button>
+        </div>
+    </div>
+
+    <!-- 2. CADASTRO DE CATEGORIA -->
+    <div id="cadastro-categoria" class="screen">
+        <h1>Cadastro de Categorias</h1>
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" placeholder="Ex: Informática, Limpeza">
+        </div>
+        <div class="btn-group">
+            <button class="btn-add">INCLUIR</button>
+            <!-- <button class="btn-del">EXCLUIR</button> -->
+            <!-- <button class="btn-cancel">CANCELAR</button> -->
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Informática</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Limpeza</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Excritório</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Tempero</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <!-- 2. CADASTRO DE ITENS -->
+    <div id="cadastro-itens" class="screen">
+        <h1>Cadastro de Itens</h1>
+        <div class="form-group">
+            <label>Descrição</label>
+            <input type="text" placeholder="Ex: Mouse Óptico Dell">
+        </div>
+        <div class="form-group">
+            <label>Categoria</label>
+            <select>
+                <option>Informática</option>
+                <option>Limpeza</option>
+                <option>Escritório</option>
+                <option>Tempero</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <div>
+                <label>Quantidade</label>
+                <input type="text" placeholder="Ex: 1000">
+
+            </div>
+            <div>
+                <label for="">Unidade de medida</label>
+                <select name="" id="">
+                    <option value="">Gramas</option>
+                    <option value="">Unidade</option>
+                </select>
+            </div>
+            
+        </div>
+        <!-- <div class="form-group">
+            <label>Valor de Referência (R$)</label>
+            <input type="number" step="0.01">
+        </div> -->
+        <div class="btn-group">
+            <button class="btn-add">INCLUIR</button>
+            <!-- <button class="btn-del">EXCLUIR</button>
+            <button class="btn-cancel">CANCELAR</button> -->
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Quatidade</th>
+                    <th>Unidade de Medida</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mouse Óptico Dell</td>
+                    <td>Informática</td>
+                    <td>2</td>
+                    <td>Unidade</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Teclado com fio Dell</td>
+                    <td>Informática</td>
+                    <td>1</td>
+                    <td>Unidade</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Sal do Himalaia</td>
+                    <td>Tempero</td>
+                    <td>1000</td>
+                    <td>Gramas</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Açúcar Demerara</td>
+                    <td>Tempero</td>
+                    <td>5000</td>
+                    <td>Gramas</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 3. CADASTRO DE USUÁRIOS -->
+    <div id="cadastro-usuarios" class="screen">
+        <h1>Cadastro de Usuários</h1>
+        <div class="form-group">
+            <label>Nome Completo</label>
+            <input type="text">
+        </div>
+        <div class="form-group">
+            <label>Número do Crachá (ID Único)</label>
+            <input type="number">
+        </div>
+        <div class="form-group">
+            <label>Nível de Acesso</label>
+            <select>
+                <option>Usuário</option>
+                <option>Administrador</option>
+            </select>
+        </div>
+        <div class="btn-group">
+            <button class="btn-add">INCLUIR</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome completo</th>
+                    <th>Numero crachá</th>
+                    <th>Nível Acesso</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>João Silva</td>
+                    <td>0123005</td>
+                    <td>Usuário</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Maria Souza</td>
+                    <td>0123006</td>
+                    <td>Usuário</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tadeu Santos</td>
+                    <td>0321001</td>
+                    <td>Administrador</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 4. SELEÇÃO DE ITENS (SOLICITAÇÃO) -->
+    <div id="selecao-itens" class="screen">
+        <h1>Nova Solicitação de Itens</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label>Data</label>
+                <input type="date" value="2026-05-17">
+            </div>
+            <div class="form-group">
+                <label>Seu Crachá</label>
+                <input type="text" value="01230005">
+            </div>
+        </div>
+        <hr style="margin: 20px 0;">
+        <div class="form-group">
+            <label>Categoria (Filtro)</label>
+            <select>
+                <option>Informática</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Item</label>
+            <select>
+                <option>Teclado Mecânico ABNT2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Quantidade/Gramas</label>
+            <input type="number" min="1">
+        </div>
+        <div class="form-group">
+            <label>Indicação de Turma (Opcional)</label>
+            <input type="text" placeholder="Ex: Turma A - Engenharia">
+        </div>
+        <!-- <div class="form-group">
+            <label>Observação</label>
+            <textarea rows="3"></textarea>
+        </div> -->
+        <div class="btn-group">
+            <button class="btn-add">INCLUIR NO PEDIDO</button>
+            <button class="btn-cancel">CANCELAR</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Usuário</th>
+                    <th>Item</th>
+                    <th>Quatidade</th>
+                    <th>Unidade de Medida</th>
+                    <th>Turma</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>17/05/2026</td>
+                    <td>0123005</td>
+                    <td>Mouse Óptico Dell</td>
+                    <td>1</td>
+                    <td>Unidade</td>
+                    <td>2026/2</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>17/05/2026</td>
+                    <td>0123005</td>
+                    <td>Teclado com fio Dell</td>
+                    <td>1</td>
+                    <td>Unidade</td>
+                    <td>2026/2</td>
+                    <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- 5. GESTÃO E AVALIAÇÃO -->
+    <div id="gestao" class="screen">
+        <h1>Painel de Acompanhamento</h1>
+        <div style="margin-bottom: 20px;">
+            <button style="background: var(--dark);">Filtrar: Não Atendidas</button>
+            <button style="background: var(--primary);">Gerar PDF Unificado</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Data</th>
+                    <th>Solicitante</th>
+                    <th>Item</th>
+                    <th>Qtd</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3</td>
+                    <td>17/05/2026</td>
+                    <td>João Silva</td>
+                    <td>Mouse Óptico Dell</td>
+                    <td>01</td>
+                    <td><span class="badge waiting">EM ESPERA</span></td>
+                    <td><button class="btn-add" style="padding:5px">v</button> <button class="btn-del" style="padding:5px">x</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>17/05/2026</td>
+                    <td>João Silva</td>
+                    <td>Teclado com fio Dell</td>
+                    <td>01</td>
+                    <td><span class="badge waiting">EM ESPERA</span></td>
+                    <td><button class="btn-add" style="padding:5px">v</button> <button class="btn-del" style="padding:5px">x</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>15/05/2026</td>
+                    <td>Maria Souza</td>
+                    <td>Sal do Himalaia</td>
+                    <td>500</td>
+                    <td><span class="badge approved">APROVADO</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>14/05/2026</td>
+                    <td>Tadeu Santos</td>
+                    <td>Açúcar Demerara</td>
+                    <td>500</td>
+                    <td><span class="badge approved">APROVADO</span></td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 6. TELA RELATÓRIO -->
+    <div id="relatorio" class="screen">
+        <h1>Relatórios Administrativos</h1>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #f9f9f9; padding: 15px; border-radius: 5px;">
+            <div>
+                <label>Período De:</label>
+                <input type="date">
+            </div>
+            <div>
+                <label>Até:</label>
+                <input type="date">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Relatório</label>
+                <select>
+                    <option>Pedidos por Período</option>
+                    <option>Itens por Usuário</option>
+                    <option>Status das Solicitações</option>
+                    <option>Catálogo com Preços de Referência</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-login" style="width: auto;">GERAR RELATÓRIO</button>
+    </div>
+</main>
+
+<script>
+    function showScreen(id) {
+        // Esconde todas as telas
+        const screens = document.querySelectorAll('.screen');
+        screens.forEach(s => s.classList.remove('active'));
+        
+        // Mostra a tela selecionada
+        document.getElementById(id).classList.add('active');
+    }
+
+    function login() {
+        // Simulação de login
+        document.getElementById('login').classList.remove('active');
+        document.getElementById('sidebar').style.display = 'block';
+        showScreen('selecao-itens');
+    }
+</script>
+
+</body>
+</html>
