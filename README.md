@@ -1,44 +1,6 @@
 # StartupModelSenior
 Sistema para gestão de compras
 
-Usuário
-  Logar 
-  Selecionar itens para realizar pedido 
-Usuário -> Administrador  
-  CRUD categorias 
-  Gerir solicitações 
-  CRUD itens 
-  Gerar Relatórios 
-  CRUD usuarios 
-
- Diagrama de Classes 
-
-Este diagrama define a estrutura de dados e as relações entre os objetos do sistema. 
-
-Classe 
-
-Atributos Principais 
-
-Usuario 
-
-Nome, Crachá, Nível de Acesso (Comum/Adm) 
-
-Item (Insumo) 
-
-Descrição, Categoria, Unidade/Peso, Valor de Referência, Quantidade em Estoque 
-
-Solicitacao 
-
-Data, Usuário, Status (Flag), Turma (Opcional), Observação 
-
-ItemSolicitado 
-
-Item vinculado, Quantidade desejada 
-
-PedidoCompra 
-
-Lista de itens somados, Data de geração, Arquivo exportado (PDF/TXT) 
-
  
 
 +-------------------+ 
@@ -93,27 +55,6 @@ Lista de itens somados, Data de geração, Arquivo exportado (PDF/TXT)
 
 +-------------------+ 
 
- 
-
-+-------------------+ 
-
-|       Estoque     | 
-
-+-------------------+ 
-
-| id_item            | 
-
-| descricao         | 
-
-| unidadeOuPeso     | 
-
-| valorReferencia   | 
-
-| categoriaId       | 
-
-+-------------------+ 
-
- 
 
  
 
@@ -136,8 +77,6 @@ Lista de itens somados, Data de geração, Arquivo exportado (PDF/TXT)
 |quantidade              | 
 
 |turma                       | 
-
-|observacao                       | 
 
 +---------------------------+ 
 
