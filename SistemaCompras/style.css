@@ -1,0 +1,49 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #34495e;
+    --accent: #3498db;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f1c40f;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+}
+
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+
+body { background-color: #f4f7f6; display: flex; min-height: 100vh; }
+
+/* Main Content */
+main { flex: 1; padding: 30px; overflow-y: auto; }
+.screen { display: none; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.screen.active { display: block; }
+
+h1 { margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid var(--light); padding-bottom: 10px; }
+
+/* Forms & Inputs */
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--secondary); }
+input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+
+.btn-group { display: flex; gap: 10px; margin-top: 20px; }
+button { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; transition: 0.2s; }
+
+.btn-add { background: var(--success); }
+.btn-del { background: var(--danger); }
+.btn-cancel { background: #95a5a6; }
+.btn-login { background: var(--accent); width: 100%; margin-top: 10px; }
+button:hover { opacity: 0.8; }
+
+/* Tables & Lists */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { text-align: left; padding: 12px; border-bottom: 1px solid #eee; }
+th { background: var(--light); }
+
+/* Status Badges */
+.badge { padding: 5px 10px; border-radius: 12px; font-size: 0.8rem; color: white; font-weight: bold; }
+.approved { background: var(--success); }
+.rejected { background: var(--danger); }
+.waiting { background: var(--warning); color: #333; }
+
+/* Layout Especial Login */
+#login-container { max-width: 400px; margin: 100px auto; }
