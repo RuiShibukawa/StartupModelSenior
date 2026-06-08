@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="./style.css">
-<nav id="sidebar" style="display:none;">
+<link rel="stylesheet" href="layout/style.css">
+<nav id="sidebar">
     <h2>GESTOR PRO</h2>
     <ul>
         <li onclick="showScreen('cadastro-categoria')">Cadastro de Categorias</li>

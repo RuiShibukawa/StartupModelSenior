@@ -1,0 +1,9 @@
+@import url("../style.css");
+
+.home_titulo{
+    text-align: center;
+    width: 100%;
+    height: stretch;
+    padding: 2rem;
+    background-color: var(--success);
+}
