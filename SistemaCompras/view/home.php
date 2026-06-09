@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sistema de Pedidos</title>
-        <link rel="stylesheet" href="./index.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        <?php include "layout/menu.php"; ?>
-        <h1 class="home_titulo">Sistema de Controle de Compras</h1>
+        <?php include_once "../layout/menu.php"; ?>
+        <h1 class="home-titulo">Sistema de Controle de Compras</h1>
     </body>
 </html>

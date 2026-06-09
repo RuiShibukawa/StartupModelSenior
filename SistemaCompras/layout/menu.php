@@ -1,13 +1,13 @@
-<link rel="stylesheet" href="layout/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <nav id="sidebar">
     <h2>GESTOR PRO</h2>
     <ul>
-        <li onclick="showScreen('cadastro-categoria')">Cadastro de Categorias</li>
-        <li onclick="showScreen('cadastro-itens')">Cadastro de Itens</li>
-        <li onclick="showScreen('cadastro-usuarios')">Cadastro de Usuários</li>
-        <li onclick="showScreen('selecao-itens')">Solicitar Itens</li>
-        <li onclick="showScreen('gestao')">Gestão e Avaliação</li>
-        <li onclick="showScreen('relatorio')">Relatórios</li>
-        <li onclick="location.reload()">Sair</li>
+        <li><a href="../view/formCategoria.php">Cadastro de Categorias</a></li>
+        <li><a href="../view/formItem.php">Cadastro de Itens</a></li>
+        <li><a href="../view/formUsuario.php">Cadastro de Usuários</a></li>
+        <li><a href="../view/formSelecaoItens.php">Solicitar Itens</a></li>
+        <li><a href="../view/formGestaoAvaliacao.php">Gestão e Avaliação</a></li>
+        <li><a href="../view/formRelatorios.php">Relatórios</a></li>
+        <li><a href="../controller/logout.php">Sair</a></li>
     </ul>
 </nav>
