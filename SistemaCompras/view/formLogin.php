@@ -1,7 +1,7 @@
-<main id="login" class="screen active">
+<main id="login">
     <!-- <form action="./controller/controller.php" id="login-container" method="POST"> -->
     <form action="./view/home.php" id="login-container" method="POST">
-        <h1>Acesso ao Sistema</h1>
+        <h1 class="titulo-login">Acesso ao Sistema</h1>
         <div class="form-group">
             <label>Nome do Usuário</label>
             <input type="text" placeholder="Digite seu nome">

@@ -8,6 +8,8 @@
     </head>
     <body>
         <?php include_once "../layout/menu.php"; ?>
-        <h1 class="home-titulo">Sistema de Controle de Compras</h1>
+        <main>
+            <h1 class="titulo-view">Sistema de Controle de Compras</h1>
+        </main>
     </body>
 </html>
