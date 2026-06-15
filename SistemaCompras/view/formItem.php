@@ -9,19 +9,18 @@
     <?php include_once "../layout/menu.php"; ?>
     <main>
         <div id="cadastro-itens" class="screen">
-            <form action="../controller/itemController" method="post">
-                <h1>Cadastro de Itens</h1>
+            <form action="../controller/itemController.php" method="post">
+                <h1 class="titulo-view">Cadastro de Itens</h1>
                 <div class="form-group">
                     <label for="descricao-item">Descrição</label>
-                    <input type="text" id="descricao-item" placeholder="Ex: Mouse Óptico Dell">
+                    <input type="text" name="descricao-item" id="descricao-item" placeholder="Ex: Mouse Óptico Dell">
                 </div>
                 <div class="form-group">
                     <label for="select-categoria">Categoria</label>
-                    <select id="select-categoria">
-                        <option>Informática</option>
-                        <option>Limpeza</option>
-                        <option>Escritório</option>
-                        <option>Tempero</option>
+                    <select id="select-categoria" name="select-categoria">
+                        <?php foreach ($categorias as $categoria){ ?>
+                            <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
+                        <?php }?>
                     </select>
                 </div>
                 <div class="form-group">
@@ -29,8 +28,8 @@
                     <input type="text" id="quantidade-item" placeholder="Ex: 1000">
                 </div>
                 <div class="form-group">
-                    <label for="unidade-medida-item">Unidade de medida</label>
-                    <select name="" id="unidade-medida-item">
+                    <label for="unidadeMedida-item">Unidade de medida</label>
+                    <select name="unidadeMedida-item" id="unidadeMedida-item">
                         <option value="">Gramas</option>
                         <option value="">Unidade</option>
                     </select>
@@ -53,43 +52,90 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mouse Óptico Dell</td>
-                        <td>Informática</td>
-                        <td>2</td>
-                        <td>Unidade</td>
-                        <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Teclado com fio Dell</td>
-                        <td>Informática</td>
-                        <td>1</td>
-                        <td>Unidade</td>
-                        <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Sal do Himalaia</td>
-                        <td>Tempero</td>
-                        <td>1000</td>
-                        <td>Gramas</td>
-                        <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Açúcar Demerara</td>
-                        <td>Tempero</td>
-                        <td>5000</td>
-                        <td>Gramas</td>
-                        <td><button class="btn-add" style="padding:5px">Alterar</button> <button class="btn-del" style="padding:5px">Excluir</button></td>
-                    </tr>
-                    
+                    <?php foreach ($itens as $item){ ?>
+                        <tr>
+                            <td><?= $item['id'] ?></td>
+                            <td><?= $item['descricao']?></td>
+                            <td><?= $item['categoria']['nome']?></td>
+                            <td><?= $item['quantidade']?></td>
+                            <td><?= $item['unidadeMedida']?></td>
+                            <td class="btn-group">
+
+                                <button class="btn-update" 
+                                    dado-id="<?= $item['id'] ?>" 
+                                    dado-descricao="<?= $item['descricao'] ?>" 
+                                    dado-categoria="<?= $item['categoria']?>"
+                                    dado-quantidade="<?= $item['quantidade']?>"
+                                    dado-unidadeMedida="<?= $item['unidadeMedida']?>"
+                                    onclick="abrirModal(this)"
+                                >Alterar</button> 
+
+                                <form action="../controller/categoriaController.php" method="post">
+                                    <input type="hidden" name="id" value="<?= $item['id']?>">
+                                    <input type="hidden" name="acao" value="delete">
+                                    <button type="submit" class="btn-del" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
     </main>
+    <script>
+        function abrirModal(botao) {
+            const id = botao.getAttribute('dado-id');
+            const descricao = botao.getAttribute('dado-descricao');
+            const categoria = botao.getAttribute('dado-categoria');
+            const quantidade = botao.getAttribute('dado-quantidade');
+            const unidadeMedida = botao.getAttribute('dado-unidadeMedida');
 
+            document.getElementById('modal-id').value = id;
+            document.getElementById('modal-descricao').value = descricao;
+            document.getElementById('modal-categoria').value = categoria;
+            document.getElementById('modal-quantidade').value = quantidade;
+            document.getElementById('modal-unidadeMedida').value = unidadeMedida;
+
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
+<form action="../controller/itemController.php" method="POST" id="modal">
+    <div id="modal-container">
+        <h3>Alterar Item</h3>
+        <div>
+            <input type="hidden" name="modal-id" id="modal-id">
+
+            <label for="modal-descricao">Descrição</label>
+            <input type="text" name="modal-descricao" id="modal-descricao">
+            
+            <label for="modal-categoria">Categoria</label>
+            <select id="modal-categoria" name="modal-categoria">
+                <?php foreach ($categorias as $categoria){ ?>
+                    <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
+                <?php }?>
+            </select>
+            
+            <label for="modal-quantidade">Quantidade</label>
+            <input type="text" name="modal-quantidade" id="modal-quantidade">
+            
+            <label for="modal-unidadeMedida">Unidade Medida</label>
+            <select name="modal-unidadeMedida" id="modal-unidadeMedida">
+                <option value="">Gramas</option>
+                <option value="">Unidade</option>
+            </select>
+            
+            <br><br>
+            <input type="hidden" name="acao" value="update">
+            
+            <button class="btn-add" type="submit" value="Atualizar">Salvar</button>
+            <button class="btn-cancel" type="button" onclick="fecharModal()">Cancelar</button>
+        </div >
+    </div>
+</form>
 </html>
