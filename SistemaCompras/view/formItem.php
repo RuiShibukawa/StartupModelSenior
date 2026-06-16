@@ -32,6 +32,9 @@
                     <select name="unidadeMedida-item" id="unidadeMedida-item">
                         <option value="">Gramas</option>
                         <option value="">Unidade</option>
+                        <option value="">Metros</option>
+                        <option value="">Quilos</option>
+                        <option value="">Litros</option>
                     </select>
                 </div>
                     

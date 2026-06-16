@@ -1,6 +1,7 @@
 [
-    {"id": 1, "descricao" : "Mouse Óptico Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 2, "unidadeMedida": "UN"},
-    {"id": 1, "descricao" : "Teclado com fio Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 1, "unidadeMedida": "UN"},
-    {"id": 1, "descricao" : "Sal do Himalaia", "categoria": {"id":4, "nome":"Tempero"}, "quantidade": 1000, "unidadeMedida": "GR"},
-    {"id": 1, "descricao" : "Açucar Demerara", "categoria": {"id":4, "nome":"Tempero"}, "quantidade": 5000, "unidadeMedida": "GR"}
+    {"id": 1, "descricao" : "Mouse Óptico Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 2, "unidadeMedida": "Unidade"},
+    {"id": 2, "descricao" : "Teclado com fio Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 1, "unidadeMedida": "Unidade"},
+    {"id": 3, "descricao" : "Sal do Himalaia", "categoria": {"id":4, "nome":"Tempero"}, "quantidade": 1000, "unidadeMedida": "Gramas"},
+    {"id": 4, "descricao" : "Açucar Demerara", "categoria": {"id":4, "nome":"Tempero"}, "quantidade": 5000, "unidadeMedida": "Gramas"}
 ]
+

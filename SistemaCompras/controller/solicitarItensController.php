@@ -11,11 +11,11 @@
             echo("solicitação excluída");
         }
     }
-    // elseif($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["acao"]) && !empty($_GET["acao"])){
-    //     if($_GET["acao"] == "listAll"){
-    //         $solicitações = json_decode(file_get_contents('../mocks/categorias.json'), true);
-    //         include '../view/formCategoria.php';
-    //     }
-    // }
+    elseif($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["acao"]) && !empty($_GET["acao"])){
+        if($_GET["acao"] == "listAll"){
+            $solicitações = json_decode(file_get_contents('../mocks/solicitacao.json'), true);
+            include '../view/formSolicitarItens.php';
+        }
+    }
 
 ?>
