@@ -5,13 +5,13 @@ botaoIncluir.addEventListener("click", (evento)=>{
 
     const data = document.getElementById("data-solicitarItens").getAttribute("value");
     const cracha = document.getElementById("cracha-solicitarItens").getAttribute("value");
-    const categoria = document.getElementById("seelct-categoria-solicitarItens");
-    const categoriaId = categoria.ariaValueMax;
+    const categoria = document.getElementById("select-categoria-solicitarItens");
+    const categoriaId = categoria.value;
     const categoriaNome = categoria.options[categoria.selectedIndex].text;
     const item = document.getElementById("select-item-solicitarItens");
-    const itemId = item.ariaValueMax;
+    const itemId = item.value;
     const itemDesc = item.options[item.selectedIndex].text;
-    const unidadeMedida = item.options[item.selectedIndex].getAttribute["data-unidade"];
+    const unidadeMedida = item.options[item.selectedIndex].getAttribute("data-unidade");
     const quantidade = document.getElementById("quantidade-item").value;
     const turma = document.getElementById("turma-item").value;
 

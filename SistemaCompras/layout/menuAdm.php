@@ -5,7 +5,7 @@
         <li><a href="../controller/categoriaController.php?acao=listAll">Cadastro de Categorias</a></li>
         <li><a href="../controller/itemController.php?acao=listAll">Cadastro de Itens</a></li>
         <li><a href="../controller/usuarioController.php?acao=listAll">Cadastro de Usuários</a></li>
-        <li><a href="../controller/solicitarItensController.php?acao-listAll">Solicitar Itens</a></li>
+        <li><a href="../controller/solicitarItensController.php?acao=listAll">Solicitar Itens</a></li>
         <li><a href="../view/formGestaoAvaliacao.php">Gestão e Avaliação</a></li>
         <li><a href="../view/formRelatorios.php">Relatórios</a></li>
         <li><a href="../controller/logout.php">Sair</a></li>

@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['ususario'])){
+    if(!isset($_SESSION['usuario'])){
         header('Location: formLogin.php');
         exit();
     }
@@ -30,7 +30,7 @@
                 <div class="data-cracha-solicitacao">
                     <div class="form-group">
                         <label>Data</label>
-                        <span class="textoBloqueado" id="data-solicitarItens" value="<?= data('d/m/Y')?>"><?= data('d/m/Y')?></span>
+                        <span class="textoBloqueado" id="data-solicitarItens" value="<?= date('d/m/Y')?>"><?= date('d/m/Y')?></span>
                     </div>
                     <div class="form-group">
                         <label>Seu Crachá</label>
@@ -90,15 +90,15 @@
     <script>
         const itens = <?php echo json_encode($itens) ?>
 
-        fucntion filtrarItens(){
+        function filtrarItens(){
             const categoriaSelecionada = document.getElementById("select-categoria-solicitarItens").value;
-            const selectItens = documnet.getElementById("select-item-solicitarItens");
+            const selectItens = document.getElementById("select-item-solicitarItens");
 
             //limpa opções
-            selectItens.innerHTML = '<option value="">-- Selecion um item --</option>';
+            selectItens.innerHTML = '<option value="">-- Selecione um item --</option>';
             
             //filtra e adiciona
-            itens.foreach(item => {
+            itens.forEach(item => {
                 if(item.categoria.id == categoriaSelecionada){
                     let option = document.createElement("option");
                     option.value = item.id;
@@ -111,9 +111,9 @@
             });
         }
 
-        document.getElementById("select-item-solicitarItens").addEventListener("change", () => {
+        document.getElementById("select-item-solicitarItens").addEventListener("change", function() {
             const inputQuantidade = document.getElementById("quantidade-item");
-            const optionSelecionada = this.option[this.selectedIndex];
+            const optionSelecionada = this.options[this.selectedIndex];
             const unidadeMedida = optionSelecionada.getAttribute("data-unidade");
             if(unidadeMedida){
                 inputQuantidade.placeholder = "Informe a quantidade em " + unidadeMedida;

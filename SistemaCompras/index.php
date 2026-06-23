@@ -7,6 +7,6 @@
         <title>Sistema de Pedidos - login</title>
     </head>
     <body>
-        <?php include_once "view/formLogin.php" ?>
+        <?php header("Location: view/formLogin.php") ?>
     </body>
 </html>

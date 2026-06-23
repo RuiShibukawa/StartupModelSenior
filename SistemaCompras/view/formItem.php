@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['ususario'])){
+    if(!isset($_SESSION['usuario'])){
         header('Location: formLogin.php');
         exit();
     }
