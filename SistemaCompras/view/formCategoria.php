@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['ususario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +17,13 @@
     <title>Lista de Categorias</title>
 </head>
 <body>
-    <?php include_once "../layout/menu.php"; ?>
+    <?php 
+        if($nivelAcesso == "Administrador"){
+            include_once "../layout/menuAdm.php"; 
+        }else {
+            include_once "../layout/menu.php";    
+        }
+    ?>
     <main>
         <div id="cadastro-categoria" class="screen">
             <form action="../controller/categoriaController.php" method="POST">

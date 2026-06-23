@@ -1,6 +1,6 @@
 [
-    {"id": 1, "nome" : "João Silva", "cracha": "0123005", "nivelAcesso": 1},
-    {"id": 2, "nome" : "Maria Souza", "cracha": "0123006", "nivelAcesso": 1},
-    {"id": 3, "nome" : "Tadeu Santos", "cracha": "0321001", "nivelAcesso": 0},
-    {"id": 4, "nome" : "Lili Amarau", "cracha": "0321002", "nivelAcesso": 0}
+    {"id": 1, "nome" : "João Silva", "cracha": "0123005", "nivelAcesso": "Usuario"},
+    {"id": 2, "nome" : "Maria Souza", "cracha": "0123006", "nivelAcesso": "Usuario"},
+    {"id": 3, "nome" : "Tadeu Santos", "cracha": "0321001", "nivelAcesso": "Administrador"},
+    {"id": 4, "nome" : "Lili Amarau", "cracha": "0321002", "nivelAcesso": "Administrador"}
 ]

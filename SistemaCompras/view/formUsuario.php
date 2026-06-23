@@ -1,3 +1,14 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['ususario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +18,13 @@
     <title>Lista de Usuários</title>
 </head>
 <body>
-    <?php include_once "../layout/menu.php"?>
+    <?php 
+        if($nivelAcesso == "Administrador"){
+            include_once "../layout/menuAdm.php"; 
+        }else {
+            include_once "../layout/menu.php";    
+        }
+    ?>
     <main>
         <div id="cadastro-usuarios" class="screen">
             <form action="../controller/usuarioController.php" method="POST">
@@ -22,7 +39,6 @@
                 </div>
                 <div class="form-group">
                     <label for="nivel-usuario">Nível de Acesso</label>
-                    <!-- Nível acesso tem que buscar na base de dados.... -->
                     <select id="nivel-usuario">
                         <option>Usuário</option>
                         <option>Administrador</option>
@@ -50,7 +66,7 @@
                             <td><?= $usuario['id'] ?></td>
                             <td><?= $usuario['nome'] ?></td>
                             <td><?= $usuario['cracha'] ?></td>
-                            <td><?= ($usuario['nivelAcesso'] == 0) ? "Administrador" : "Usuário"; ?></td>
+                            <td><?= $usuario['nivelAcesso'] ?></td>
                             <td class="btn-group">
                                 <button class="btn-update" 
                                     data-id="<?= $usuario['id'] ?>" 
@@ -83,7 +99,7 @@
             document.getElementById('modal-id').value = id;
             document.getElementById('modal-nome').value = nome;
             document.getElementById('modal-cracha').value = cracha;
-            document.getElementById('modal-nivelAcesso').value = (nivelAcesso == 0) ? "Administrador" : "Usuário";;
+            document.getElementById('modal-nivelAcesso').value = nivelAcesso;
 
             document.getElementById('modal').style.display = 'block';
         }

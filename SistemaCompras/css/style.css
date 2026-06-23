@@ -11,169 +11,183 @@
     --dark: #2c3e50;
     --gray: #777;
     --white: #ffffff;
+    --msgErro: #f80606;
 }
 
-* { 
-    box-sizing: border-box; 
-    font-family: 'Segoe UI', sans-serif; 
-    margin: 0; 
-    padding: 0; 
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
 }
-
-body { 
-    background-color: var(--azulSenac); 
-    display: flex; 
-    min-height: 100vh; 
+ 
+body {
+    background-color: var(--azulSenac);
+    display: flex;
+    min-height: 100vh;
 }
-
+ 
 /* Main */
-main { 
-    flex: 1; 
-    padding: 2em; 
-    overflow-y: auto; 
+main {
+    flex: 1;
+    padding: 2em;
+    overflow-y: auto;
 }
-.screen { 
-    background: var(--light); 
-    padding: 1.5em; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+.screen {
+    background: var(--light);
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
+ 
 /* Login */
-#login-container { 
-    max-width: 400px; 
-    margin: 100px auto; 
+#login-container {
+    max-width: 400px;
+    margin: 100px auto;
 }
-.titulo-login { 
-    margin-bottom: 1.25em; 
-    color: var(--laranjaSenac); 
-    border-bottom: 2px solid var(--light); 
-    padding-bottom: 0.75em; 
+.titulo-login {
+    margin-bottom: 1.25em;
+    color: var(--laranjaSenac);
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 0.75em;
 }
-.btn-login { 
-    background: var(--laranjaClaroSenac); 
-    width: 100%; 
-    margin-top: 0.75em; 
+.btn-login {
+    background: var(--laranjaClaroSenac);
+    width: 100%;
+    margin-top: 0.75em;
 }
-
-
+.mensagem-error {
+    color: var(--msgErro);
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+ 
 /* Menu sidebar*/
-#sidebar { 
-    width: 20em; 
-    background: var(--laranjaSenac); 
-    color: var(--white); 
-    padding: 1.5em; 
-    transition: 0.3s; 
+#sidebar {
+    width: 20em;
+    background: var(--laranjaSenac);
+    color: var(--white);
+    padding: 1.5em;
+    transition: 0.3s;
     font-weight: 600;
 }
-#sidebar h2 { 
-    font-size: 1.2rem; 
-    margin-bottom: 2em; 
-    text-align: center; 
-    color: var(--azulSenac); 
+#sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 2em;
+    text-align: center;
+    color: var(--azulSenac);
 }
-#sidebar ul { 
-    list-style: none; 
+#sidebar ul {
+    list-style: none;
 }
-#sidebar li { 
-    padding: 0.9em; 
-    cursor: pointer; 
-    border-bottom: 1px solid var(--dark); 
-    font-size: 1em; 
+#sidebar li {
+    padding: 0.9em;
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+    font-size: 1em;
 }
-#sidebar li:hover { 
-    background: var(--azulSenac); 
+#sidebar li:hover {
+    background: var(--azulSenac);
 }
-#sidebar a { 
+#sidebar a {
     text-decoration: none;
     color: var(--white);
 }
-
+ 
 #sidebar li:last-child{
     margin-top: 1rem;
 }
-
-
+ 
 /* VIEW - HOME */
 .titulo-view{
     text-align: center;
     width: 100%;
     color: var(--laranjaSenac);
 }
-
+.subtitulo-home{
+    text-align: center;
+    color: var(--laranjaClaroSenac);
+    margin: 1em 0;
+}
+ 
 /* VIEW - formSolicitarItens */
 .data-cracha-solicitacao{
     display: flex;
     justify-content: space-around;
     gap: 1.5em;
+    margin: 1em 0 1em 0;
 }
-
+ 
 /* Forms & Inputs - Para todos views*/
-.form-group { 
-    margin-bottom: 1em; 
+.form-group {
+    margin-bottom: 1em;
 }
-label { 
-    margin-bottom: 0.3em; 
-    font-weight: bold; 
-    color: var(--laranjaSenac); 
+label {
+    margin-bottom: 0.3em;
+    font-weight: bold;
+    color: var(--laranjaSenac);
 }
-input, select, textarea, .textoBloqueado { 
-    width: 100%; 
-    padding: 0.75em; 
-    border: 1px solid var(--white); 
-    border-radius: 4px; 
+input, select, textarea, .textoBloqueado {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid var(--white);
+    border-radius: 4px;
 }
-
-.btn-group { 
-    display: flex; 
-    gap: 0.75em; 
+ 
+.btn-group {
+    display: flex;
+    gap: 0.75em;
 }
-button { 
-    padding: 0.75em 1.5em; 
-    border: none; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    color: var(--white); 
-    transition: 0.2s; 
+button {
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--white);
+    transition: 0.2s;
 }
-
-.btn-add { 
-    background: var(--btnInclude); 
+ 
+.btn-add {
+    background: var(--btnInclude);
 }
 .btn-update{
     padding: 0.35em;
     font-weight: 500;
     background-color: var(--btnUpdate);
 }
-.btn-del { 
+.btn-del {
     padding: 0.35em;
     font-weight: 500;
-    background: var(--btnRemove); 
+    background: var(--btnRemove);
 }
-.btn-cancel { 
-    background: var(--btnCancel); 
+.btn-cancel {
+    background: var(--btnCancel);
 }
-
-button:hover { 
-    opacity: 0.8; 
+ 
+button:hover {
+    opacity: 0.8;
 }
-
+ 
 /* Tables & Lists - Para todos os views*/
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    margin-top: 1.5em; 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5em;
 }
-th, td { 
-    text-align: left; 
-    padding: 0.8em; 
-    border-bottom: 1px solid var(--dark); 
+th, tr {
+    text-align: left;
+    padding: 0.8em;
+    border-bottom: 1px solid var(--dark);
 }
-th { 
-    background: var(--gray); 
+th {
+    background: var(--gray);
 }
-
+td {
+    padding: 0.4em;
+}
+ 
 /* Modal (tela pop up)*/
 #modal{
     display: none;
@@ -185,35 +199,26 @@ th {
     background: rgba(0,0,0,0.5);
 }
 #modal-container {
-    background:var(--light); 
-    padding: 1.5em; 
-    margin: 6.25em auto; 
+    background:var(--light);
+    padding: 1.5em;
+    margin: 6.25em auto;
     width: 300px;
 }
-
+ 
 /* Status Badges */
-.badge { 
-    padding: 5px 10px; 
-    border-radius: 12px; 
-    font-size: 0.8rem; 
-    color: var(--white); 
-    font-weight: bold; 
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: var(--white);
+    font-weight: bold;
 }
-.approved { 
+.approved {
     background: var(--success);
- }
-.rejected { 
-    background: var(--danger); }
-.waiting { 
-    background: var(--warning); 
-    color: #333; 
 }
-
-
-
-
-
-
-
-
-
+.rejected {
+    background: var(--danger); }
+.waiting {
+    background: var(--warning);
+    color: #333;
+}

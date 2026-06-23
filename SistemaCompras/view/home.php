@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['ususario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -7,9 +17,16 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        <?php include_once "../layout/menu.php"; ?>
+        <?php 
+            if($nivelAcesso == "Administrador"){
+                include_once "../layout/menuAdm.php"; 
+            }else {
+                include_once "../layout/menu.php";    
+            }
+        ?>
         <main>
             <h1 class="titulo-view">Sistema de Controle de Compras</h1>
+            <h2 class="subtitulo-home">Seja bem vindo <?= $usuario ?></h2>
         </main>
     </body>
 </html>

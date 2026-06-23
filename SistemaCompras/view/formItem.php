@@ -1,3 +1,13 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['ususario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,7 +16,13 @@
     <title>Lista de Itens</title>
 </head>
 <body>
-    <?php include_once "../layout/menu.php"; ?>
+   <?php 
+        if($nivelAcesso == "Administrador"){
+            include_once "../layout/menuAdm.php"; 
+        }else {
+            include_once "../layout/menu.php";    
+        }
+    ?>
     <main>
         <div id="cadastro-itens" class="screen">
             <form action="../controller/itemController.php" method="post">
@@ -30,11 +46,11 @@
                 <div class="form-group">
                     <label for="unidadeMedida-item">Unidade de medida</label>
                     <select name="unidadeMedida-item" id="unidadeMedida-item">
-                        <option value="">Gramas</option>
-                        <option value="">Unidade</option>
-                        <option value="">Metros</option>
-                        <option value="">Quilos</option>
-                        <option value="">Litros</option>
+                        <option value="Gramas">Gramas</option>
+                        <option value="Unidade">Unidade</option>
+                        <option value="Metros">Metros</option>
+                        <option value="Quilos">Quilos</option>
+                        <option value="Litros">Litros</option>
                     </select>
                 </div>
                     
@@ -129,8 +145,11 @@
             
             <label for="modal-unidadeMedida">Unidade Medida</label>
             <select name="modal-unidadeMedida" id="modal-unidadeMedida">
-                <option value="">Gramas</option>
-                <option value="">Unidade</option>
+                <option value="Gramas">Gramas</option>
+                <option value="Unidade">Unidade</option>
+                <option value="Metros">Metros</option>
+                <option value="Quilos">Quilos</option>
+                <option value="Litros">Litros</option>
             </select>
             
             <br><br>
