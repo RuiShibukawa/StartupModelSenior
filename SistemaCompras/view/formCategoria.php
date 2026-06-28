@@ -17,8 +17,8 @@
     <title>Lista de Categorias</title>
 </head>
 <body>
-    <?php 
-        if($nivelAcesso == "Administrador"){
+   <?php 
+        if($nivelAcesso === 0){
             include_once "../layout/menuAdm.php"; 
         }else {
             include_once "../layout/menu.php";    

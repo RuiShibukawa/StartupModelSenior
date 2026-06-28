@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php 
-        if($nivelAcesso == "Administrador"){
+        if($nivelAcesso === 0){
             include_once "../layout/menuAdm.php"; 
         }else {
             include_once "../layout/menu.php";    

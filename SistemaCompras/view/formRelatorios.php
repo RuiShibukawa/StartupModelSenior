@@ -1,15 +1,14 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+    if(!isset($_SESSION['usuario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
 
 require_once __DIR__ . '/../config/database.php';
-
-$user = $_SESSION['user'] ?? null;
-if (!$user) {
-    header("Location: ../index.php");
-    exit();
-}
 
 try {
     $db = Database::getConnection();
@@ -60,7 +59,13 @@ try {
     <title>Relatórios</title>
 </head>
 <body>
-    <?php include_once __DIR__ . "/../layout/menu.php"; ?>
+    <?php         
+        if($nivelAcesso === 0){
+            include_once "../layout/menuAdm.php"; 
+        }else {
+            include_once "../layout/menu.php";    
+        } 
+    ?>
     <main>
         <div id="relatorios" class="screen">
             <h1 class="titulo-view">Relatórios e Estatísticas</h1>

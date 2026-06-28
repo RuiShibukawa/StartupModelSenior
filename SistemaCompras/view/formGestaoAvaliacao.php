@@ -1,16 +1,15 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+    if(!isset($_SESSION['usuario'])){
+        header('Location: formLogin.php');
+        exit();
+    }
+    $usuario = $_SESSION['usuario'];
+    $cracha = $_SESSION['cracha'];
+    $nivelAcesso = $_SESSION['nivelAcesso'];
 
 require_once __DIR__ . '/../model/Solicitacao.php';
 require_once __DIR__ . '/../model/Itens.php';
-
-$user = $_SESSION['user'] ?? null;
-if (!$user) {
-    header("Location: ../index.php");
-    exit();
-}
 
 $solicitacaoModel = new Solicitacao();
 $itensModel = new Itens();
@@ -57,7 +56,13 @@ $solicitacoes = $solicitacaoModel->listAll();
     <title>Gestão e Avaliação</title>
 </head>
 <body>
-    <?php include_once __DIR__ . "/../layout/menu.php"; ?>
+    <?php 
+        if($nivelAcesso === 0){
+            include_once "../layout/menuAdm.php"; 
+        }else {
+            include_once "../layout/menu.php";    
+        }
+    ?>
     <main>
         <div id="gestao-avaliacao" class="screen">
             <h1 class="titulo-view">Gestão e Avaliação de Pedidos</h1>

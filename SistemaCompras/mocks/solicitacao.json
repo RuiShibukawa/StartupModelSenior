@@ -1,5 +1,0 @@
-[
-    {"id": 1, "data": "17/05/2026", "status": "Espera" ,"usuario" : {"id": 1, "nome" : "João Silva", "cracha": "0123005", "nivelAcesso": 1}, "item": {"id": 1, "descricao" : "Mouse Óptico Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 2, "unidadeMedida": "Unidade"}, "turma": ""},
-    {"id": 2, "data": "17/05/2026", "status": "Compra", "usuario": {"id": 1, "nome" : "João Silva", "cracha": "0123005", "nivelAcesso": 1}, "item": {"id": 2, "descricao" : "Teclado com fio Dell", "categoria": {"id":1, "nome":"Informática"}, "quantidade": 1, "unidadeMedida": "Unidade"}, "turma": ""}
-    
-]

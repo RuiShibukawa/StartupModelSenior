@@ -1,9 +1,10 @@
 <?php 
     session_start();
-    
-    $usuarios = json_decode(file_get_contents('../mocks/usuarios.json'), true);
+    require_once __DIR__ . '/../model/Usuario.php';
+    $usuarioModel = new Usuario();
+    $usuarios = $usuarioModel->listAll();
 
-    $cracha = $_POST['numero-cracha'];
+    $cracha = $_POST['numero-cracha'] ?? null;
 
     foreach ($usuarios as $usuario) {
         if($cracha == $usuario['cracha']){
