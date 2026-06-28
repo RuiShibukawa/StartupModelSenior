@@ -53,6 +53,10 @@ botaoIncluir.addEventListener("click", (evento)=>{
 
     `;
     listaDeItens.appendChild(linhaItem);
+    document.getElementById("turma-item").value = "";
+    document.getElementById("quantidade-item").value = "";
+    item.options.length = 1;
+    
 })
 
 document.getElementById("tabela-de-itens").addEventListener("click", (evento)=>{
