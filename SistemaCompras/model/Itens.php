@@ -54,8 +54,23 @@ class Itens {
     }
 
     public function delete($id) {
-        $stmt = $this->db->prepare("DELETE FROM itens WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+        try {
+            $this->db->beginTransaction();
+
+            $stmtSolicitacoes = $this->db->prepare("DELETE FROM solicitacoes WHERE item_id = :id");
+            $stmtSolicitacoes->execute([':id' => $id]);
+
+            $stmt = $this->db->prepare("DELETE FROM itens WHERE id = :id");
+            $resultado = $stmt->execute([':id' => $id]);
+
+            $this->db->commit();
+            return $resultado;
+        } catch (Throwable $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            return false;
+        }
     }
 
     public function deductStock($id, $quantidade) {

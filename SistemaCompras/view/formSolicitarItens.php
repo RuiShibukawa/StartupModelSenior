@@ -1,5 +1,7 @@
 <?php 
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     if(!isset($_SESSION['usuario'])){
         header('Location: formLogin.php');
         exit();
@@ -34,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label>Seu Crachá</label>
-                        <span class="textoBloqueado" id="cracha-solicitarItens" value="<?= $cracha ?>"><?= $cracha ?></span>
+                        <span class="textoBloqueado" id="cracha-solicitarItens" value="<?= htmlspecialchars($cracha) ?>"><?= htmlspecialchars($cracha) ?></span>
                     </div>
                 </div>
                 <hr>
@@ -43,7 +45,7 @@
                     <select id="select-categoria-solicitarItens" name="select-categoria-solicitarItens" onchange="filtrarItens()">
                         <option value="">Selecione uma categoria</option>
                         <?php foreach ($categorias as $categoria){ ?>
-                            <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
+                            <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -62,10 +64,11 @@
                     <input type="text" placeholder="Ex: Turma A - Engenharia" id="turma-item" name="turma-item">
                 </div>
                 <div class="btn-group">
-                    <button class="btn-add" id="incluir-item-solicitarItens">INCLUIR NO PEDIDO</button>
+                    <button type="button" class="btn-add" id="incluir-item-solicitarItens">INCLUIR NO PEDIDO</button>
                 </div>
             </section>
             <form action="../controller/solicitarItensController.php" method="post">
+                <input type="hidden" name="acao" value="create">
                 <table>
                     <thead>
                         <tr>
@@ -82,13 +85,13 @@
 
                     </tbody>
                 </table>
-                <button class="btn-add" type="submit">Solicitar</button>
+                <button class="btn-add" type="submit" onclick="return validarSolicitacao()">Solicitar</button>
             </form>
     
         </div>
     </main>
     <script>
-        const itens = <?php echo json_encode($itens) ?>
+        const itens = <?php echo json_encode($itens, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
 
         function filtrarItens(){
             const categoriaSelecionada = document.getElementById("select-categoria-solicitarItens").value;
@@ -111,13 +114,23 @@
             });
         }
 
+        function validarSolicitacao(){
+            const listaDeItens = document.getElementById("tabela-de-itens");
+            if(listaDeItens.children.length === 0){
+                alert("Inclua pelo menos um item no pedido antes de solicitar.");
+                return false;
+            }
+            return true;
+        }
+
         document.getElementById("select-item-solicitarItens").addEventListener("change", function() {
             const inputQuantidade = document.getElementById("quantidade-item");
             const optionSelecionada = this.options[this.selectedIndex];
-            const unidadeMedida = optionSelecionada.getAttribute("data-unidade");
+            const unidadeMedida = optionSelecionada ? optionSelecionada.getAttribute("data-unidade") : "";
             if(unidadeMedida){
                 inputQuantidade.placeholder = "Informe a quantidade em " + unidadeMedida;
-
+            } else {
+                inputQuantidade.placeholder = "";
             }
         });
     </script>

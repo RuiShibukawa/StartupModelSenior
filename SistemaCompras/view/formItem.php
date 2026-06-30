@@ -35,13 +35,13 @@
                     <label for="select-categoria">Categoria</label>
                     <select id="select-categoria" name="select-categoria">
                         <?php foreach ($categorias as $categoria){ ?>
-                            <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
+                            <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
                         <?php }?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="quantidade-item">Quantidade</label>
-                    <input type="text" id="quantidade-item" placeholder="Ex: 1000">
+                    <input type="text" name="quantidade-item" id="quantidade-item" placeholder="Ex: 1000">
                 </div>
                 <div class="form-group">
                     <label for="unidadeMedida-item">Unidade de medida</label>
@@ -73,24 +73,24 @@
                 <tbody>
                     <?php foreach ($itens as $item){ ?>
                         <tr>
-                            <td><?= $item['id'] ?></td>
-                            <td><?= $item['descricao']?></td>
-                            <td><?= $item['categoria']['nome']?></td>
-                            <td><?= $item['quantidade']?></td>
-                            <td><?= $item['unidadeMedida']?></td>
+                            <td><?= htmlspecialchars($item['id']) ?></td>
+                            <td><?= htmlspecialchars($item['descricao'])?></td>
+                            <td><?= htmlspecialchars($item['categoria']['nome'])?></td>
+                            <td><?= htmlspecialchars($item['quantidade'])?></td>
+                            <td><?= htmlspecialchars($item['unidadeMedida'])?></td>
                             <td class="btn-group">
 
-                                <button class="btn-update" 
-                                    dado-id="<?= $item['id'] ?>" 
-                                    dado-descricao="<?= $item['descricao'] ?>" 
-                                    dado-categoria="<?= $item['categoria']?>"
-                                    dado-quantidade="<?= $item['quantidade']?>"
-                                    dado-unidadeMedida="<?= $item['unidadeMedida']?>"
+                                <button type="button" class="btn-update" 
+                                    dado-id="<?= htmlspecialchars($item['id']) ?>" 
+                                    dado-descricao="<?= htmlspecialchars($item['descricao']) ?>" 
+                                    dado-categoria="<?= htmlspecialchars($item['categoria']['id'])?>"
+                                    dado-quantidade="<?= htmlspecialchars($item['quantidade'])?>"
+                                    dado-unidadeMedida="<?= htmlspecialchars($item['unidadeMedida'])?>"
                                     onclick="abrirModal(this)"
                                 >Alterar</button> 
 
-                                <form action="../controller/categoriaController.php" method="post">
-                                    <input type="hidden" name="id" value="<?= $item['id']?>">
+                                <form action="../controller/itemController.php" method="post">
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars($item['id'])?>">
                                     <input type="hidden" name="acao" value="delete">
                                     <button type="submit" class="btn-del" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
                                 </form>
@@ -123,41 +123,42 @@
             document.getElementById('modal').style.display = 'none';
         }
     </script>
-</body>
-<form action="../controller/itemController.php" method="POST" id="modal">
-    <div id="modal-container">
-        <h3>Alterar Item</h3>
-        <div>
-            <input type="hidden" name="modal-id" id="modal-id">
 
-            <label for="modal-descricao">Descrição</label>
-            <input type="text" name="modal-descricao" id="modal-descricao">
-            
-            <label for="modal-categoria">Categoria</label>
-            <select id="modal-categoria" name="modal-categoria">
-                <?php foreach ($categorias as $categoria){ ?>
-                    <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
-                <?php }?>
-            </select>
-            
-            <label for="modal-quantidade">Quantidade</label>
-            <input type="text" name="modal-quantidade" id="modal-quantidade">
-            
-            <label for="modal-unidadeMedida">Unidade Medida</label>
-            <select name="modal-unidadeMedida" id="modal-unidadeMedida">
-                <option value="Gramas">Gramas</option>
-                <option value="Unidade">Unidade</option>
-                <option value="Metros">Metros</option>
-                <option value="Quilos">Quilos</option>
-                <option value="Litros">Litros</option>
-            </select>
-            
-            <br><br>
-            <input type="hidden" name="acao" value="update">
-            
-            <button class="btn-add" type="submit" value="Atualizar">Salvar</button>
-            <button class="btn-cancel" type="button" onclick="fecharModal()">Cancelar</button>
-        </div >
-    </div>
-</form>
+    <form action="../controller/itemController.php" method="POST" id="modal">
+        <div id="modal-container">
+            <h3>Alterar Item</h3>
+            <div>
+                <input type="hidden" name="modal-id" id="modal-id">
+
+                <label for="modal-descricao">Descrição</label>
+                <input type="text" name="modal-descricao" id="modal-descricao">
+                
+                <label for="modal-categoria">Categoria</label>
+                <select id="modal-categoria" name="modal-categoria">
+                    <?php foreach ($categorias as $categoria){ ?>
+                        <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
+                    <?php }?>
+                </select>
+                
+                <label for="modal-quantidade">Quantidade</label>
+                <input type="text" name="modal-quantidade" id="modal-quantidade">
+                
+                <label for="modal-unidadeMedida">Unidade Medida</label>
+                <select name="modal-unidadeMedida" id="modal-unidadeMedida">
+                    <option value="Gramas">Gramas</option>
+                    <option value="Unidade">Unidade</option>
+                    <option value="Metros">Metros</option>
+                    <option value="Quilos">Quilos</option>
+                    <option value="Litros">Litros</option>
+                </select>
+                
+                <br><br>
+                <input type="hidden" name="acao" value="update">
+                
+                <button class="btn-add" type="submit" value="Atualizar">Salvar</button>
+                <button class="btn-cancel" type="button" onclick="fecharModal()">Cancelar</button>
+            </div >
+        </div>
+    </form>
+</body>
 </html>
